@@ -1,5 +1,9 @@
 <?php
 
+    include 'validator.php'; // this calls in the validator php file
+
+    $valObj = new Validator(); // this creats a usable object to call the validator file
+
     $fullname = "";
     $email = "";
     $comments = "";
@@ -22,7 +26,17 @@
         }
     } //-- end of count if statment --
 
-    if(!empty($fullname) && !empty($email) && !empty($comments))
+    if($valObj->isFullNameValid($fullname))
+    {
+        echo"<p>Full Name is good</p>";
+    }
+    else
+    {
+        echo"<p>Full Name is not valid</p>";
+    }
+    
+    
+    if($valObj->isFullNameValid($fullname) && !empty($email) && !empty($comments))
     {
         $dbh = new PDO("mysql:host=localhost;port=3306;dbname=phplab","root","");
 
