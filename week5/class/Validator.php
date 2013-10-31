@@ -1,6 +1,6 @@
 <?php
 
-
+        
 class Validator {
     //put your code here
     
@@ -25,30 +25,37 @@ class Validator {
        return false; 
     }
     
-      public static function loginIsValid( $username, $password ) {
-        
-        $password = sha1($password);
-        $dbCls = new DB();
-        $db = $dbCls->getDB();
-        if ( NULL != $db ) {
-            $stmt = $db->prepare('select * from signup where username = :usernameValue and password = :passwordValue limit 1');
-            $stmt->bindParam(':usernameValue', $username, PDO::PARAM_STR);
-            $stmt->bindParam(':passwordValue', $password, PDO::PARAM_STR);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ( count($result) ) return true;
+    public static function loginIsValidPost()
+    {
+        if( array_key_exists("username", $_POST) || array_key_exists("password", $_POST) )
+        {
+            return false;
         }
-        return false;
+        return Validator::loginIsValid($_POST["username"], $_POST["password"]);
     }
     
-    public static function signupEntryIsValid() {
-        
-        if ( count($_POST) ) {
-            
-        }
-       
-        return false;
+    public static function loginIsValid($username, $password ) {
+
+      if ( !Validator::usernameIsValid($username) || !Validator::passwordIsValid($password) )
+      {
+          return false;
+      }
+
+      $password = sha1($password);
+      $dbCls = new DB();
+      $db = $dbCls->getDB();
+      if ( NULL != $db ) {
+          $stmt = $db->prepare('select * from signup where username = :usernameValue and password = :passwordValue limit 1');
+          $stmt->bindParam(':usernameValue', $username, PDO::PARAM_STR);
+          $stmt->bindParam(':passwordValue', $password, PDO::PARAM_STR);
+          $stmt->execute();
+          $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          if ( is_array($result) &&  count($result) ) return true;
+      }
+      return false;
     }
-    
+
 }
+
+?>

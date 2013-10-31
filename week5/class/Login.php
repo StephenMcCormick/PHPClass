@@ -22,3 +22,5 @@ class Login extends DB {
     
     
 }
+
+?>

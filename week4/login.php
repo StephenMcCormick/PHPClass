@@ -69,14 +69,17 @@ and open the template in the editor.
         $username = (isset($_POST["username"]) ? $_POST["username"] : "");
         $password = (isset($_POST["password"]) ? $_POST["password"] : "");
         
-        if( !empty($username) && !empty($password) && Validator::loginIsValid($username, $password) )
+        if(count($_POST))
         {
-            $_SESSION["isLoggedIn"] = true;
-            header("Location:admin.php");
-        }
-        else
-        {
-            echo "<p>username or password are incorrect</p>";
+            if( !empty($username) && !empty($password) && Validator::loginIsValid($username, $password) )
+            {
+                $_SESSION["isLoggedIn"] = true;
+                header("Location:admin.php");
+            }
+            else
+            {
+                echo "<p>username or password are incorrect</p>";
+            }
         }
         
         

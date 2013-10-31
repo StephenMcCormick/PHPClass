@@ -8,7 +8,17 @@
     </head>
     <body>
         <?php
-        // put your code here
+        
+        if ( Validator::loginIsValidPost() )
+        {
+            $_SESSION["isLoggedin"] = true;
+        }
+        
+        if( isset($_SESSION["isLoggedin"]) && $_SESSION["isLoggedin"] == true )
+        {
+            header("Location: admin.php");
+        }
+
         ?>
         <h1>Login</h1>
         <form name="mainform" action="login.php" method="post">
