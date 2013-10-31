@@ -52,7 +52,7 @@ class Signup extends DB {
             {
                 $this->errors["username"] = "Username is not valid!";// if the username is not valid then the error will be filled with this message
             }
-            if( userNameIsTaken($_POST["username"]) == true ) // i am getting a fatal error on this line --------
+            if( $this->userNameIsTaken($_POST["username"]) == true ) 
             {
                 $this->errors["username"] = "That Username has been taken!"; // if the username that the user entered is already in the database
             }
@@ -85,11 +85,12 @@ class Signup extends DB {
         if ( !$this->entryIsValid() ) return false; // make sure everything is valid one more time
         
         $db = $this->getDB();
+        $password = sha1($_POST["password"]); // sha1 to encript the password
         if ( null != $db ) {
             $stmt = $db->prepare('insert into signup set username = :usernameValue, email = :emailValue, password = :passwordValue');
             $stmt->bindParam(':usernameValue', $_POST["username"], PDO::PARAM_STR);
             $stmt->bindParam(':emailValue', $_POST["email"], PDO::PARAM_STR);
-            $stmt->bindParam(':passwordValue', sha1($_POST["password"]), PDO::PARAM_STR); // sha1 to encript the password
+            $stmt->bindParam(':passwordValue', $password, PDO::PARAM_STR); 
             if ( $stmt->execute() ) // if everything was excecuted corectly
             {
                 return true;
