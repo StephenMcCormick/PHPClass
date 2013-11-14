@@ -8,9 +8,29 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <?php
+        $randcolor = array("red", "white", "blue");
+        $phrase = array("this is phrase one", "this is another phrase", "one more for the road");
+        
+        function onLoad()
+        {
+            return rand(0, 2);
+        }
+        
+        ?>
+        <style>
+            body{
+                background-color: <?php echo $randcolor[onLoad()]; ?>;
+            }
+        </style>
     </head>
     <body>
         <?php
+        
+        echo $phrase[onLoad()];
+        
+        echo"<br/><br/>";
+        
         $firstname = 'stephen'; //name variable
 	$lastname = 'mccormick'; //name variable
 	
@@ -160,6 +180,56 @@ and open the template in the editor.
 		echo "yes";
 	else
 		echo "no";
+        
+        
+        // -- E --
+        
+        date_default_timezone_set("America/New_York");
+        
+        function token()
+        {
+            return sha1(uniqid(mt_rand(), true));
+        }
+        
+        $rows = 100;
+        $col = 1;
+        
+        echo "<table border='1'>";
+        
+        for($tr=1;$tr<=$rows;$tr++)
+        { 
+            if (($tr % 2) == 0)
+                {
+                    echo "<tr bgcolor=#E6E6E6>";
+                }
+                else 
+                {
+                    echo "<tr bgcolor=#FFFFFF>";
+                }
+                for($td=1;$td<=$col;$td++)
+                {
+                    $date = date("F j, Y, g:i a");
+                    echo "<td>".$date." ".token()."</td>"; 
+                } 
+            echo "</tr>"; 
+        } 
+        echo "</table>"; 
+        
+        
+        // -- F --
+        /*
+         * F was moved to the top of the code for that background fun stuff
+        $randcolor = array("red", "white", "blue");
+        $phrase = array("this is phrase one", "this is another phrase", "one more for the road");
+        
+        function onLoad()
+        {
+            return rand(0, 2);
+        }
+        
+        echo "color is: ",$randcolor[onLoad()]," ",$phrase[onLoad()]; 
+         * */
+         
         ?>
     </body>
 </html>
