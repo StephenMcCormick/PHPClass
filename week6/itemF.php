@@ -38,13 +38,12 @@ and open the template in the editor.
                     && Validator::stringIsValid($_POST["address"]) )
             {
                 
-                    $db = new PDO(Config::DB_DNS, Config::DB_USER, Config::DB_PASSWORD);
-                
-                   
-                
+                $db = new PDO(Config::DB_DNS, Config::DB_USER, Config::DB_PASSWORD);
+
                 if ( null != $db ) 
                 {
-                    $stmt = $db->prepare('insert into addressbook set address = :addressValue, '
+                    $stmt = $db->prepare('insert into addressbook set '
+                            . 'address = :addressValue, '
                             . 'city = :cityValue, '
                             . 'state = :stateValue, '
                             . 'zip = :zipValue, '
@@ -55,14 +54,20 @@ and open the template in the editor.
                     $stmt->bindParam(':zipValue', $_POST["zip"], PDO::PARAM_STR);
                     $stmt->bindParam(':nameValue', $_POST["name"], PDO::PARAM_STR);
                     $stmt->execute();  
-                }
-                echo "it worked!";
-            }
+                    echo "saved to database";
+                } // end database if not null
+                else
+                {
+                    echo "not saved!!!";
+                } //end database if not null else
+                
+                echo "good validation";
+            } // end validation if
             else
             {
-                echo "nope";
-            }
-        }
+                echo "bad validation!!!";
+            } // end validation else
+        } // end if count
         
         
         
