@@ -8,6 +8,7 @@ class AddressBook extends DB{
         
         if ( NULL != $deleteID && Address::deleteAddress($deleteID) ) 
         {
+            
             echo '<p>Entry Deleted</p>';
         }
     }

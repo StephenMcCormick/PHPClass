@@ -32,9 +32,10 @@ class Address extends DB {
         $dbc = new DB();
         $db = $dbc->getDB();
         
-        $statement = $db->prepare('select * from address, name where address.id = :id');
+        $statement = $db->prepare('select address.id, address, city, state, zip, name.name from address, name where address.id = :id and name.id = address.name_id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
+        //print_r($db->errorInfo());
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -42,9 +43,10 @@ class Address extends DB {
     public static function getAllAddresses() {
         $dbc = new DB();
         $db = $dbc->getDB();
-        $statement = $db->prepare('select * from address, name where name.id = address.name_id');
+        $statement = $db->prepare('select address.id, address, city, state, zip, name.name from address, name where name.id = address.name_id');
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //print_r($result);
         return $result;
     }
 
@@ -57,7 +59,7 @@ class Address extends DB {
         if ( $statement->execute() ) {
             return true;
         }
-        
+
         return false;
     }
     
