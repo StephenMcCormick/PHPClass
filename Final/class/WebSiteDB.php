@@ -84,7 +84,7 @@ class WebSiteDB extends DB{
         $db = $this->getDB();
         if ( null != $db ) {
             
-            $stmt = $db->prepare('insert into website '
+            $stmt = $db->prepare('insert into page '
                     . 'set user_id = :userIDValue, title = "Put Title Here", theme = "theme1", address = "Put Address Here", phone = "1111111111", email = :emailValue, about = "Put An About Here"');
             $stmt->bindParam(':userIDValue', $userID, PDO::PARAM_INT);
             //$stmt->bindParam(':titleValue', "Put Title Here", PDO::PARAM_STR);
