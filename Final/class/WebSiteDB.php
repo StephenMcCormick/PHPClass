@@ -57,6 +57,8 @@ class WebSiteDB extends DB{
     }
     
     
+    // ------------ this still isnt working ------------
+    
     public function getUserID(){
         $db = $this->getDB();
         if ( null != $db ) {
@@ -70,27 +72,27 @@ class WebSiteDB extends DB{
                 return $return;
             }
         }
-        return false;
+        //return false;
     }
     
     
     
     public function defaultEntry() {
         
-        $userID = getUserID();
+        $userID = $this->getUserID();
         
         $db = $this->getDB();
         if ( null != $db ) {
             
             $stmt = $db->prepare('insert into website '
-                    . 'set user_id = :userIDValue, title = :titleValue, theme = :themeValue, address = :addressValue, phone = :phoneValue, email = :emailValue, about = :aboutValue');
+                    . 'set user_id = :userIDValue, title = "Put Title Here", theme = "theme1", address = "Put Address Here", phone = "1111111111", email = :emailValue, about = "Put An About Here"');
             $stmt->bindParam(':userIDValue', $userID, PDO::PARAM_INT);
-            $stmt->bindParam(':titleValue', "Put Title Here", PDO::PARAM_STR);
-            $stmt->bindParam(':themeValue', "theme1", PDO::PARAM_STR);
-            $stmt->bindParam(':addressValue', "Put Address Here", PDO::PARAM_STR);
-            $stmt->bindParam(':phoneValue', "1111111111", PDO::PARAM_STR);
+            //$stmt->bindParam(':titleValue', "Put Title Here", PDO::PARAM_STR);
+            //$stmt->bindParam(':themeValue', "theme1", PDO::PARAM_STR);
+            //$stmt->bindParam(':addressValue', "Put Address Here", PDO::PARAM_STR);
+            //$stmt->bindParam(':phoneValue', "1111111111", PDO::PARAM_STR);
             $stmt->bindParam(':emailValue', $_POST["email"], PDO::PARAM_STR);
-            $stmt->bindParam(':aboutValue', "Put An About Here", PDO::PARAM_STR);
+            //$stmt->bindParam(':aboutValue', "Put An About Here", PDO::PARAM_STR);
             
             if ( $stmt->execute() ) // if everything was excecuted corectly
             {
@@ -101,7 +103,7 @@ class WebSiteDB extends DB{
     }
     
     
-    
+    // --------------------- -------------------
     
     
     public function getErrors() {
