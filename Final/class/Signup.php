@@ -93,7 +93,13 @@ class Signup extends DB {
             $stmt->bindParam(':passwordValue', $password, PDO::PARAM_STR); 
             if ( $stmt->execute() ) // if everything was excecuted corectly
             {
-                return true;
+                // to do: this is where i need to make the connection to the website database
+                $websiteDBClass = new WebSiteDB(); // creats new instence of the websiteDB class file
+            
+                if($websiteDBClass->defaultEntry())// will call and fill website database with default info..... hopefully
+                {
+                    return true;
+                }
             }
         }
         return false; 
