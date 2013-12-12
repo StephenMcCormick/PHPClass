@@ -25,6 +25,24 @@ class Validator {
        return false; 
     }
     
+    public static function isString($str)
+    {
+        if ( is_string($str) && !empty($str) ) {
+            return true;
+        }        
+        return false;
+        
+    }
+    
+    public static function isInt($int)
+    {
+        if ( is_numeric($int) && strlen($int) === 10 ) {
+            return true;
+        }        
+        return false;
+        
+    }
+    
     public static function loginIsValidPost()
     {
         if( array_key_exists("email", $_POST) || array_key_exists("password", $_POST) )

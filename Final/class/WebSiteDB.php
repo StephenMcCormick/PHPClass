@@ -6,6 +6,10 @@ class WebSiteDB extends DB{
     
     public function entryIsValid(){
         $this->emailEntryIsValid();
+        $this->titleEntryIsValid();
+        $this->addressEntryIsValid();
+        $this->phoneEntryIsValid();
+        $this->aboutEntryIsValid();
                 
         return ( count($this->errors) ? false : true );
     }
@@ -26,21 +30,89 @@ class WebSiteDB extends DB{
         return ( empty($this->errors["email"]) ? true : false ); // if there are no errors then this will return true, if the error messege is filled with something it will return false
     }
     
+    public function titleEntryIsValid() {
+        if (array_key_exists("title", $_POST) )
+        {
+            if ( !Validator::isString($_POST["title"]) )
+            {
+                $this->errors["title"] = "Title is not valid!"; // if the title is not valid then the error will be filled with this message
+            }
+        }
+        else
+        {
+            $this->errors["title"] = "Title is required!"; // if the email is not entered then the error will be filled with this message
+        }
+        
+        return ( empty($this->errors["title"]) ? true : false ); // if there are no errors then this will return true, if the error messege is filled with something it will return false
+    }
+    
+    public function addressEntryIsValid() {
+        if (array_key_exists("address", $_POST) )
+        {
+            if ( !Validator::isString($_POST["address"]) )
+            {
+                $this->errors["address"] = "Address is not valid!"; // if the title is not valid then the error will be filled with this message
+            }
+        }
+        else
+        {
+            $this->errors["address"] = "Address is required!"; // if the email is not entered then the error will be filled with this message
+        }
+        
+        return ( empty($this->errors["address"]) ? true : false ); // if there are no errors then this will return true, if the error messege is filled with something it will return false
+    }
+    
+    public function phoneEntryIsValid() {
+        if (array_key_exists("phone", $_POST) )
+        {
+            if ( !Validator::isInt($_POST["phone"]) )
+            {
+                $this->errors["phone"] = "Phone is not valid! must be 10 digits long."; // if the title is not valid then the error will be filled with this message
+            }
+        }
+        else
+        {
+            $this->errors["phone"] = "Phone is required!"; // if the email is not entered then the error will be filled with this message
+        }
+        
+        return ( empty($this->errors["phone"]) ? true : false ); // if there are no errors then this will return true, if the error messege is filled with something it will return false
+    }
+    
+    public function aboutEntryIsValid() {
+        if (array_key_exists("about", $_POST) )
+        {
+            if ( !Validator::isString($_POST["about"]) )
+            {
+                $this->errors["about"] = "About is not valid!"; // if the title is not valid then the error will be filled with this message
+            }
+        }
+        else
+        {
+            $this->errors["about"] = "About is required!"; // if the email is not entered then the error will be filled with this message
+        }
+        
+        return ( empty($this->errors["about"]) ? true : false ); // if there are no errors then this will return true, if the error messege is filled with something it will return false
+    }
     
     
     
-    
-    
-    
-    public function saveEntry() {
+    public function saveEntry($userID) {
         if ( !$this->entryIsValid() ) return false; // make sure everything is valid one more time
         
+        //$userID = $this->getUserID();
+        intval($userID);
         $db = $this->getDB();
         if ( null != $db ) {
-            $stmt = $db->prepare('update into website '
-                    . 'set title = :titleValue, theme = :themeValue, address = :addressValue, phone = :phoneValue, email = :emailValue, about = :aboutValue'
-                    . 'where user_id = :userIDValue');
-            $stmt->bindParam(':userIDValue', $_POST["userID"], PDO::PARAM_INT);
+            $stmt = $db->prepare('update page '
+                    . 'set '
+                    . 'title = :titleValue, '
+                    . 'theme = :themeValue, '
+                    . 'address = :addressValue, '
+                    . 'phone = :phoneValue, '
+                    . 'email = :emailValue, '
+                    . 'about = :aboutValue '
+                    . 'where user_id = :userIDValue;');
+            $stmt->bindParam(':userIDValue', $userID, PDO::PARAM_INT);
             $stmt->bindParam(':titleValue', $_POST["title"], PDO::PARAM_STR);
             $stmt->bindParam(':themeValue', $_POST["theme"], PDO::PARAM_STR);
             $stmt->bindParam(':addressValue', $_POST["address"], PDO::PARAM_STR);
@@ -55,9 +127,6 @@ class WebSiteDB extends DB{
         }
         return false; 
     }
-    
-    
-    // ------------ this still isnt working ------------
     
     public function getUserID(){
         $db = $this->getDB();
@@ -74,8 +143,6 @@ class WebSiteDB extends DB{
         }
         //return false;
     }
-    
-    
     
     public function defaultEntry() {
         
@@ -101,10 +168,6 @@ class WebSiteDB extends DB{
         }
         return false; 
     }
-    
-    
-    // --------------------- -------------------
-    
     
     public function getErrors() {
         return $this->errors;

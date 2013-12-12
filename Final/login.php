@@ -36,9 +36,15 @@
         
         if(count($_POST))
         {
-            if ( Validator::loginIsValid($email, $password) )
+            if ( Validator::loginIsValid($email, $password) ) //check to make sure email and password match in database
             {
-                $_SESSION["isLoggedin"] = true;
+                $thisMore = new WebSiteDB(); // websitedb class
+                
+                $_SESSION["isLoggedin"] = true; // they are now logged in
+                
+                $userID = $thisMore->getUserID(); // use the class to get user id  
+                $_SESSION["userID"] = $userID;
+                
                 header("Location:admin.php");
             }
             else
@@ -47,6 +53,7 @@
             }
         }
         
+        // if they are already logged in or if they have just successfuly logged in
         if( isset($_SESSION["isLoggedin"]) && $_SESSION["isLoggedin"] == true )
         {
             header("Location:admin.php");
