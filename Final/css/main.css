@@ -1,0 +1,41 @@
+form{
+    border:1px solid black;
+    width:840px;
+    padding:15px;
+    margin: 15px;
+    border-radius:1em;
+    background-color:white;
+}
+
+#wrapper{
+    position:relative;
+    margin:auto;
+    width:900px;
+    height:800px;
+    padding:10px;
+    background-color:lightblue;
+}
+
+h1{
+    //color:white; 
+    //align:center;
+}
+
+.link{
+    //text-indent:250px;
+    float:right;
+}
+
+/*#heading{
+    position:relative;
+    margin:auto;
+    
+}*/
+#header{
+    position:relative;
+    margin:auto; 
+    width:900px;
+    height:100px;
+    background-color: black;
+    padding:10px;
+}

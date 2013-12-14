@@ -5,6 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
     </head>
     <body>
         <?php
@@ -60,21 +61,29 @@
         }
 
         ?>
-        <h1>Login</h1>
-        <form name="loginform" action="login.php" method="post">
-            <?php 
-               if ( !empty($errors) )
-               {
-                   echo '<p>',$errors,'</p>'; // display errors
-               }       
-            ?>
-            Email: <input type="text" name="email" /> <br />
-            Password: <input type="password" name="password" /> <br />
-            
-            <input type="hidden" name="token" value="<?php echo $token; ?>"/> <!-- avoid session hijacking-->
-                      
-            <input type="submit" value="Submit" />
-            
-        </form>
+        
+        <div id='header'>
+            <h1 style="color:white;">SaaS Project</h1>
+        </div>
+        
+        <div id="wrapper">
+            <h1>Login</h1>
+            <form name="loginform" action="login.php" method="post">
+                <?php 
+                   if ( !empty($errors) )
+                   {
+                       echo '<p>',$errors,'</p>'; // display errors
+                   }       
+                ?>
+                Email: <input type="text" name="email" /> <br />
+                Password: <input type="password" name="password" /> <br />
+
+                <input type="hidden" name="token" value="<?php echo $token; ?>"/> <!-- avoid session hijacking-->
+
+                <input type="submit" value="Login" />
+                <p class='link'>Don't have an account? <a href ="signup.php">Sign Up</a></p>
+
+            </form>
+        </div>
     </body>
 </html>

@@ -1,0 +1,32 @@
+#header{
+    position:relative;
+    margin:auto; 
+    width:900px;
+    height:100px;
+    background-color: black;
+    padding:10px;
+}
+
+#wrapper{
+    position:relative;
+    margin:auto;
+    width:900px;
+    height:600px;
+    padding:10px;
+    background-color:orange;
+}
+
+#title {
+    color:purple;
+    text-align: center;
+    width:850px;
+    font-size: 40px;
+}
+
+#address {
+    font-family: "courier";
+}
+
+#about {
+    font-family: "courier";
+}

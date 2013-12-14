@@ -5,6 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
     </head>
     <body>
         <?php
@@ -27,33 +28,41 @@
         }
         
         ?>
+        <div id='header'>
+            <h1 style="color:white;">SaaS Project</h1>
+        </div>
         
-        <form name="signupform" action="signup.php" method="post">
+        <div id="wrapper">
+            <h1>Sign Up</h1>
+            <form name="signupform" action="signup.php" method="post">
 
-            Website: <input type="text" name="website" /> <br />
-                <?php 
-                    if ( !empty($enteryErrors["website"]) )
-                    {
-                        echo '<p>',$enteryErrors["website"],'</p>'; // display errors
-                    }       
-                ?>
-            Email: <input type="text" name="email" /> <br />
-                <?php 
-                    if ( !empty($enteryErrors["email"]) )
-                    {
-                        echo '<p>',$enteryErrors["email"],'</p>'; // display errors
-                    }       
-                ?>
-            Password: <input type="password" name="password" /> <br />
-                <?php 
-                    if ( !empty($enteryErrors["password"]) )
-                    {
-                        echo '<p>',$enteryErrors["password"],'</p>'; // display errors
-                    }       
-                ?>
-            <input type="submit" value="Submit" />
+                Website: <input type="text" name="website" /> <br />
+                    <?php 
+                        if ( !empty($enteryErrors["website"]) )
+                        {
+                            echo '<p>',$enteryErrors["website"],'</p>'; // display errors
+                        }       
+                    ?>
+                Email: <input type="text" name="email" /> <br />
+                    <?php 
+                        if ( !empty($enteryErrors["email"]) )
+                        {
+                            echo '<p>',$enteryErrors["email"],'</p>'; // display errors
+                        }       
+                    ?>
+                Password: <input type="password" name="password" /> <br />
+                    <?php 
+                        if ( !empty($enteryErrors["password"]) )
+                        {
+                            echo '<p>',$enteryErrors["password"],'</p>'; // display errors
+                        }       
+                    ?>
+                <input type="submit" value="Sign Up" />
+                <p class='link'>Already have an account? <a href ="login.php">Login</a></p>
 
-        </form>
+            </form>
+        </div>
+        
         
     </body>
 </html>

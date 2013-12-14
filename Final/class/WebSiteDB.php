@@ -144,6 +144,22 @@ class WebSiteDB extends DB{
         //return false;
     }
     
+    public function getUserWebSite($userID){
+        $db = $this->getDB();
+        if ( null != $db ) {
+            $stmt = $db->prepare('select website, user_id from users where user_id = :user_idValue');
+            $stmt->bindParam(':user_idValue', $userID, PDO::PARAM_STR);
+            
+            if ( $stmt->execute() ) // if everything was excecuted corectly
+            {
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                $return = $data['website'];
+                return $return;
+            }
+        }
+        //return false;
+    }
+    
     public function defaultEntry() {
         
         $userID = $this->getUserID();
