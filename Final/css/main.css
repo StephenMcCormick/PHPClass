@@ -39,3 +39,17 @@ h1{
     background-color: black;
     padding:10px;
 }
+
+
+a:link { /* unvisited link */
+    color:#000;
+}      
+a:visited { /* visited link */
+    color:#000;
+}  
+a:hover { /* mouse over link */
+    color:blue;
+}  
+a:active { /* selected link */
+    color:purple;
+}  

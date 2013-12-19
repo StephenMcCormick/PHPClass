@@ -4,7 +4,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title><?php
+                    $userID = $_SESSION["userID"]; // gets the user ID from the session 
+                    $adminLoadClass = new AdminLoad(); // new instince of adminload class
+        
+                    $data = $adminLoadClass->getWebPageData($userID);
+                    echo $data["title"]; // this will take the title of the page and make it the title of the website for the user
+                ?></title>
     </head>
     <body>
         <?php
@@ -27,7 +33,7 @@
         <div id='header'>
             <h1 style="color:white; float:left;">SaaS Project</h1>
             
-            <a href ="admin.php" style="float:right;">Back</a>
+            <a href ="admin.php" style="color:white; float:right;">Back</a>
             
             <span style="color:white; float:right;">Welcome to <?php  // this will display the website name at the top in the header
                                     echo $userWebSite;

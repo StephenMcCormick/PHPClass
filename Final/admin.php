@@ -17,8 +17,8 @@
         //validate data in form before updating row in table --- good enough
         //update row in table with form data ------------------- good
         //add an update button --------------------------------- good
-        //add link to demo/display page
-        //drink beer when done
+        //add link to demo/display page ------------------------ good
+        //drink beer when done --------------------------------- oggd
         
         $message="";
         
@@ -70,7 +70,7 @@
         <div id='header'>
             <h1 style="color:white; float:left;">SaaS Project</h1>
             
-            <a href ="admin.php?logout=1" style="float:right;">Logout</a>
+            <a href ="admin.php?logout=1" style="color:white; float:right;">Logout</a>
             
             <span style="color:white; float:right;">Welcome <?php  // this will display the website name at the top in the header
                                     echo $userWebSite;
